@@ -63,7 +63,7 @@ in {
           notification-inline-replies = false;
           notification-icon-size = 64;
           notification-body-image-height = 100;
-          notification-body-image-width = 200
+          notification-body-image-width = 200;
         };
       '';
       description = ''
@@ -95,8 +95,8 @@ in {
       Unit = {
         Description = "Swaync notification daemon";
         Documentation = "https://github.com/ErikReider/SwayNotificationCenter";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session-pre.target" ];
+        PartOf = [ config.wayland.systemd.target ];
+        After = [ config.wayland.systemd.target ];
         ConditionEnvironment = "WAYLAND_DISPLAY";
       };
 
@@ -107,7 +107,7 @@ in {
         Restart = "on-failure";
       };
 
-      Install.WantedBy = [ "graphical-session.target" ];
+      Install.WantedBy = [ config.wayland.systemd.target ];
     };
   };
 }
